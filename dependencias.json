@@ -1,0 +1,11 @@
+{"dependencias" : [
+    {
+        "modulo": "datatools"
+    },
+    {
+        "modulo": "fileexchange"
+    },
+    {
+        "modulo": "geoambiental"
+    }
+]}

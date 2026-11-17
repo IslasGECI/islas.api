@@ -1,0 +1,112 @@
+clear, close all, clc
+load islas
+S.Margen = Isla(strcmpi({Isla.id},'coronado')).Margen(end);
+S = importCoast(S);
+S = ungroupCoast(S);
+gs = geoshape(S.Islote);
+GP = Geopolygon(S.Islote);
+disp(' ')
+disp('Propiedades:')
+disp(' ')
+properties(GP)
+disp(' ')
+disp('GP.X')
+disp(GP.X)
+disp('GP.Y')
+disp(GP.Y)
+disp('GP.Zone')
+disp(GP.Zone)
+disp('GP.area_ha')
+disp(GP.area_ha)
+disp('GP.area_km2')
+disp(GP.area_km2)
+disp('GP.area_m2')
+disp(GP.area_m2)
+disp('GP.ejes')
+disp(GP.ejes)
+disp('GP.geohash')
+disp(GP.geohash)
+disp('GP.latMax')
+disp(GP.latMax)
+disp('GP.latMin')
+disp(GP.latMin)
+disp('GP.lonMax')
+disp(GP.lonMax)
+disp('GP.lonMin')
+disp(GP.lonMin)
+disp('GP.perimetro_m')
+disp(GP.perimetro_m)
+disp('GP.perimetro_km')
+disp(GP.perimetro_km)
+disp('GP.perimetroEnvolvente_m')
+disp(GP.perimetroEnvolvente_m)
+disp('GP.perimetroEnvolvente_km')
+disp(GP.perimetroEnvolvente_km)
+disp('GP.PuntoMedio')
+disp(GP.PuntoMedio)
+disp('GP')
+disp(GP)
+disp(' ')
+disp('Métodos:')
+disp(' ')
+methods(GP)
+disp(' ')
+disp('axis(GP)')
+axis(GP)
+S.Margen = Isla(strcmpi({Isla.id},'coronadonorte')).Margen(end);
+S = importCoast(S);
+S = ungroupCoast(S);
+B = Geopolygon(S.Islote);
+esB = strcmpi(GP.geohash,B.geohash);
+A = GP(esB);
+disp('A == B')
+disp(A == B)
+
+S.Margen = Isla(strcmpi({Isla.id},'coronado')).Margen(end);
+S = importCoast(S);
+S = ungroupCoast(S);
+gs = geoshape(S.Islote);
+C = Geopolygon(S.Islote);
+D = Geopolygon(S.Islote);
+disp('C == D')
+disp(C == D)
+disp('B == C')
+disp(B == C)
+disp('B ~= C')
+disp(B ~= C)
+disp('plot(GP)')
+plot(GP)
+disp('GP2=sort(GP)')
+GP2=sort(GP);
+disp(GP2)
+disp('text(GP,''geohash'')')
+text(GP,'geohash')
+disp(' ')
+disp(' ')
+disp(' ')
+S.Margen = Isla(strcmpi({Isla.id},'coronado')).Margen(end);
+S = importCoast(S);
+S = ungroupCoast(S);
+Islote = Islet(S.Islote);
+disp('Islote.Envolvente')
+disp(Islote.Envolvente)
+disp('plot(Islote.Envolvente)')
+hold on
+plot(Islote.Envolvente)
+disp('Islote.Recuadro')
+disp(Islote.Recuadro)
+disp('plot(Islote.Recuadro)')
+plot(Islote.Recuadro)
+disp('Islote.tamano')
+disp(Islote.tamano)
+disp('Islote2 = sort(Islote)')
+Islote2 = sort(Islote);
+disp(Islote)
+disp('Islote == Islote2')
+disp(Islote == Islote2)
+disp('ismember(Islote,Islote2)')
+disp(ismember(Islote,Islote2))
+disp('ismember(Islote2,Islote)')
+disp(ismember(Islote2,Islote))
+disp('isequal(Islote,Islote2)')
+disp(isequal(Islote,Islote2))

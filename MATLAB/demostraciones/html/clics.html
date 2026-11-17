@@ -1,0 +1,321 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>clics</title><meta name="generator" content="MATLAB 8.5"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2016-07-19"><meta name="DC.source" content="clics.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h2>Contents</h2><div><ul><li><a href="#2">Copia Isla</a></li></ul></div><pre class="codeinput">updateToolbox(<span class="string">'\\EVARISTO-PC\islas'</span>), refreshPath
+clear, close <span class="string">all</span>,  clc
+dirDatos = addDirPath([<span class="string">'Documents'</span> filesep <span class="string">'Datos'</span>]);
+load <span class="string">islas</span>;
+nIsla = length(Isla);
+Isla_json = loadjson(<span class="string">'islas.json'</span>,<span class="string">'SimplifyCell'</span>,1);
+nuevasIslas = Isla_json(~ismember({Isla_json.id},{Isla.id}));
+nNuevas = length(nuevasIslas);
+[Isla(nIsla+1:nIsla+nNuevas).id] = deal(nuevasIslas.id);
+<span class="keyword">for</span> iNuevas=1:nNuevas
+    Isla(nIsla+iNuevas).Margen.Latitude  = deal(nuevasIslas(iNuevas).Margen.Latitude);
+    Isla(nIsla+iNuevas).Margen.Longitude = deal(nuevasIslas(iNuevas).Margen.Longitude);
+<span class="keyword">end</span>
+[~,ind]=ismember({Isla_json.id},{Isla.id});
+[Isla(ind).nombre] = deal(Isla_json.nombre);
+[Isla(ind).abrev]  = deal(Isla_json.abrev);
+</pre><pre class="codeoutput">Removiendo el contenido de C:\Users\evaro\Documents\MATLAB\library\islas
+Se actualizaron las l&iacute;neas de costa
+Se actualizaron las demostraciones
+Se actualizaron las funciones principales
+Se actualizaron las clases
+Se actualizaron los datos JSON
+ 
+&Eacute;XITO: Se actualiz&oacute; islas desde \\EVARISTO-PC\islas
+ 
+</pre><h2>Copia Isla<a name="2"></a></h2><pre class="codeinput">Isla2 = Isla;
+nIslas = length(Isla2);
+<span class="keyword">for</span> iIsla=1:nIslas
+    Isla2(iIsla).Margen = Isla(iIsla).Margen(1);
+<span class="keyword">end</span>
+sonTodasMayorIgual4 = true;
+</pre><pre class="codeinput">esMin=arrayfun(@(x) length(x.Margen),[Isla])==min(arrayfun(@(x) length(x.Margen),[Isla]));
+ind = find(esMin);
+n = length(ind);
+<span class="keyword">for</span> i=ind
+    id = makeId(Isla(i).id);
+    titulo = Isla(i).nombre;
+    ejes = [min(Isla(i).Margen(1).Longitude) max(Isla(i).Margen(1).Longitude) min(Isla(i).Margen(1).Latitude) max(Isla(i).Margen(1).Latitude)];
+    lat = ejes(1:2);
+    lon = ejes(3:4);
+    dx=diff(lon)/2;
+    dy=diff(lat)/2;
+    ejes = [ejes(1)-dx ejes(2)+dx ejes(3)-dy ejes(4)+dy];
+    figure, hold <span class="string">on</span>
+    plotMexicoConIslas
+    title(titulo)
+    axis <span class="string">equal</span>
+    axis(ejes)
+    drawnow
+    [x,y] = ginput2;
+    Isla(i).Margen=[Isla(i).Margen(:)' struct(<span class="string">'Latitude'</span>,[y(:)' y(1)],<span class="string">'Longitude'</span>,[x(:)' x(1)])];
+    h = plot(Isla(i).Margen(end).Longitude,Isla(i).Margen(end).Latitude,<span class="string">'k'</span>,<span class="string">'linewidth'</span>,3);
+    drawnow; pause(.75);
+    h.Visible = <span class="string">'off'</span>;
+    nMargen = length(Isla(i).Margen);
+    <span class="keyword">if</span> nMargen &gt;=4
+        <span class="keyword">for</span> k=1:nMargen
+            plot(Isla(i).Margen(k).Longitude,Isla(i).Margen(k).Latitude)
+        <span class="keyword">end</span>
+        esMama = false;
+        esPapa = false;
+        <span class="keyword">while</span> sum(esMama)&lt;2 || sum(esPapa)&lt;2 || (abs(sum(esMama)-sum(esPapa))&gt;1)
+            esMama = rand(1,nMargen)&gt;.5;
+            esPapa = ~esMama;
+        <span class="keyword">end</span>
+        indMama = find(esMama);
+        indPapa = find(esPapa);
+        nMama = length(indMama);
+        nPapa = length(indPapa);
+        xMama = Isla(i).Margen(indMama(1)).Longitude;
+        yMama = Isla(i).Margen(indMama(1)).Latitude;
+        <span class="keyword">for</span> iMama=2:nMama
+            ind=indMama(iMama);
+            [xMama,yMama] = polybool(<span class="string">'intersection'</span>,xMama,yMama,Isla(i).Margen(ind).Longitude,Isla(i).Margen(ind).Latitude);
+        <span class="keyword">end</span>
+        patch(xMama, yMama, 1, <span class="string">'FaceColor'</span>, <span class="string">'r'</span>,<span class="string">'FaceAlpha'</span>, .3)
+        xPapa = Isla(i).Margen(indPapa(1)).Longitude;
+        yPapa = Isla(i).Margen(indPapa(1)).Latitude;
+        <span class="keyword">for</span> iPapa=2:nPapa
+            ind=indPapa(iPapa);
+            [xPapa,yPapa] = polybool(<span class="string">'intersection'</span>,xPapa,yPapa,Isla(i).Margen(ind).Longitude,Isla(i).Margen(ind).Latitude);
+        <span class="keyword">end</span>
+        patch(xPapa, yPapa, 1, <span class="string">'FaceColor'</span>, <span class="string">'b'</span>,<span class="string">'FaceAlpha'</span>, .3)
+        [x,y] = polybool(<span class="string">'union'</span>,xMama,yMama,xPapa,yPapa);
+        plot(x,y,<span class="string">'k'</span>,<span class="string">'linewidth'</span>,3);
+        Isla2(i).Margen.Latitude  = y;
+        Isla2(i).Margen.Longitude = x;
+    <span class="keyword">else</span>
+        sonTodasMayorIgual4 = false;
+    <span class="keyword">end</span>
+    drawnow
+    pause
+    close <span class="string">all</span>
+<span class="keyword">end</span>
+close <span class="string">all</span>
+drawnow
+save <span class="string">islas</span> <span class="string">Isla</span>;
+ordenaMAT
+<span class="keyword">if</span> sonTodasMayorIgual4
+    savejson(<span class="string">''</span>,Isla2,[getExtdataPath filesep <span class="string">'islas.json'</span>]);
+    ordenaJSON
+<span class="keyword">else</span>
+    disp(<span class="string">'No son Todas Mayor Igual 4'</span>);
+<span class="keyword">end</span>
+</pre><pre class="codeoutput">Clari&oacute;n: MEX_adm1.shp
+Socorro: MEX_adm1.shp
+Revillagigedo: MEX_adm1.shp
+San Benedicto: MEX_adm1.shp
+Larga: MEX_adm1.shp
+Marietas: MEX_adm1.shp
+Redonda: MEX_adm1.shp
+Mar&iacute;a Cleofas: MEX_adm1.shp
+Mar&iacute;a Madre: MEX_adm1.shp
+San Juanico: MEX_adm1.shp
+Mar&iacute;a Magdalena: MEX_adm1.shp
+Isabel: MEX_adm1.shp
+Del Carmen: MEX_adm1.shp
+San Roque: san_roque_LCosta.shp
+Asunci&oacute;n: asuncion_LCosta.shp
+Natividad: natividad_LCosta.shp
+Zapato: guadalupe_LCosta.shp
+Morro Prieto: guadalupe_LCosta.shp
+Guadalupe: guadalupe_LCosta.shp
+San Benito Oeste: san_benito_LCosta.shp
+San Benito: san_benito_LCosta.shp
+San Benito Medio: san_benito_LCosta.shp
+San Benito Este: san_benito_LCosta.shp
+San Jer&oacute;nimo: san_jeronimo_LCosta.shp
+San Mart&iacute;n: san_martin_LCosta.shp
+Cedros: MEX_adm1.shp
+Rasa: MEX_adm1.shp
+Partida: partida_LCosta_UTM-12.shp
+Todos Santos Sur: todos_santos_LCosta_2014.shp
+Todos Santos Norte: todos_santos_LCosta_2014.shp
+Todos Santos: todos_santos_LCosta_2014.shp
+Coronado Medio: coronado_LCosta.shp
+Coronado: coronado_LCosta.shp
+Coronado Norte: coronado_LCosta.shp
+Coronado Sur: coronado_LCosta.shp
+Complejo Insular Esp&iacute;ritu Santo: MEX_adm1.shp
+Danzante: MEX_adm1.shp
+Carmen: MEX_adm1.shp
+Coronado: MEX_adm1.shp
+Santa Catalina: MEX_adm1.shp
+Monserrat: MEX_adm1.shp
+Farall&oacute;n de San Ignacio: farallon_de_san_ignacio_LCosta_UTM-12.shp
+San Pedro Martir: san_pedro_martir_LCosta_UTM-12.shp
+Tibur&oacute;n: MEX_adm1.shp
+Banco Chinchorro: MEX_adm1.shp
+Arrecife Alacranes: MEX_adm1.shp
+Cozumel: MEX_adm1.shp
+Mujeres: MEX_adm1.shp
+</pre><p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2015a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+updateToolbox('\\EVARISTO-PC\islas'), refreshPath
+clear, close all,  clc
+dirDatos = addDirPath(['Documents' filesep 'Datos']);
+load islas;
+nIsla = length(Isla);
+Isla_json = loadjson('islas.json','SimplifyCell',1);
+nuevasIslas = Isla_json(~ismember({Isla_json.id},{Isla.id}));
+nNuevas = length(nuevasIslas);
+[Isla(nIsla+1:nIsla+nNuevas).id] = deal(nuevasIslas.id);
+for iNuevas=1:nNuevas
+    Isla(nIsla+iNuevas).Margen.Latitude  = deal(nuevasIslas(iNuevas).Margen.Latitude);
+    Isla(nIsla+iNuevas).Margen.Longitude = deal(nuevasIslas(iNuevas).Margen.Longitude);
+end
+[~,ind]=ismember({Isla_json.id},{Isla.id});
+[Isla(ind).nombre] = deal(Isla_json.nombre);
+[Isla(ind).abrev]  = deal(Isla_json.abrev);
+%% Copia Isla
+Isla2 = Isla;
+nIslas = length(Isla2);
+for iIsla=1:nIslas
+    Isla2(iIsla).Margen = Isla(iIsla).Margen(1);
+end
+sonTodasMayorIgual4 = true;
+%%
+esMin=arrayfun(@(x) length(x.Margen),[Isla])==min(arrayfun(@(x) length(x.Margen),[Isla]));
+ind = find(esMin);
+n = length(ind);
+for i=ind
+    id = makeId(Isla(i).id);
+    titulo = Isla(i).nombre;
+    ejes = [min(Isla(i).Margen(1).Longitude) max(Isla(i).Margen(1).Longitude) min(Isla(i).Margen(1).Latitude) max(Isla(i).Margen(1).Latitude)];
+    lat = ejes(1:2);
+    lon = ejes(3:4);
+    dx=diff(lon)/2;
+    dy=diff(lat)/2;
+    ejes = [ejes(1)-dx ejes(2)+dx ejes(3)-dy ejes(4)+dy];
+    figure, hold on
+    plotMexicoConIslas
+    title(titulo)
+    axis equal
+    axis(ejes)
+    drawnow
+    [x,y] = ginput2;
+    Isla(i).Margen=[Isla(i).Margen(:)' struct('Latitude',[y(:)' y(1)],'Longitude',[x(:)' x(1)])];
+    h = plot(Isla(i).Margen(end).Longitude,Isla(i).Margen(end).Latitude,'k','linewidth',3);
+    drawnow; pause(.75);
+    h.Visible = 'off';
+    nMargen = length(Isla(i).Margen);
+    if nMargen >=4
+        for k=1:nMargen
+            plot(Isla(i).Margen(k).Longitude,Isla(i).Margen(k).Latitude)
+        end
+        esMama = false;
+        esPapa = false;
+        while sum(esMama)<2 || sum(esPapa)<2 || (abs(sum(esMama)-sum(esPapa))>1)
+            esMama = rand(1,nMargen)>.5;
+            esPapa = ~esMama;
+        end
+        indMama = find(esMama);
+        indPapa = find(esPapa);
+        nMama = length(indMama);
+        nPapa = length(indPapa);
+        xMama = Isla(i).Margen(indMama(1)).Longitude;
+        yMama = Isla(i).Margen(indMama(1)).Latitude;
+        for iMama=2:nMama
+            ind=indMama(iMama);
+            [xMama,yMama] = polybool('intersection',xMama,yMama,Isla(i).Margen(ind).Longitude,Isla(i).Margen(ind).Latitude);
+        end
+        patch(xMama, yMama, 1, 'FaceColor', 'r','FaceAlpha', .3)
+        xPapa = Isla(i).Margen(indPapa(1)).Longitude;
+        yPapa = Isla(i).Margen(indPapa(1)).Latitude;
+        for iPapa=2:nPapa
+            ind=indPapa(iPapa);
+            [xPapa,yPapa] = polybool('intersection',xPapa,yPapa,Isla(i).Margen(ind).Longitude,Isla(i).Margen(ind).Latitude);
+        end
+        patch(xPapa, yPapa, 1, 'FaceColor', 'b','FaceAlpha', .3)
+        [x,y] = polybool('union',xMama,yMama,xPapa,yPapa);
+        plot(x,y,'k','linewidth',3);
+        Isla2(i).Margen.Latitude  = y;
+        Isla2(i).Margen.Longitude = x;
+    else
+        sonTodasMayorIgual4 = false;
+    end
+    drawnow
+    pause
+    close all
+end
+close all
+drawnow
+save islas Isla;
+ordenaMAT
+if sonTodasMayorIgual4
+    savejson('',Isla2,[getExtdataPath filesep 'islas.json']);
+    ordenaJSON
+else
+    disp('No son Todas Mayor Igual 4');
+end
+##### SOURCE END #####
+--></body></html>

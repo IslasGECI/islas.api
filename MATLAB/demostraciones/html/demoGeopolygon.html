@@ -1,0 +1,341 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>demoGeopolygon</title><meta name="generator" content="MATLAB 9.2"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2017-11-28"><meta name="DC.source" content="demoGeopolygon.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h2>Contents</h2><div><ul><li><a href="#2">Propiedades:</a></li><li><a href="#3">Geopoligono.Zone</a></li><li><a href="#4">Geopoligono.area_ha</a></li><li><a href="#5">Geopoligono.area_km2</a></li><li><a href="#6">Geopoligono.area_m2</a></li><li><a href="#7">Geopoligono.ejes</a></li><li><a href="#8">Geopoligono.geohash</a></li><li><a href="#9">Geopoligono.latMax</a></li><li><a href="#10">Geopoligono.latMin</a></li><li><a href="#11">Geopoligono.lonMax</a></li><li><a href="#12">Geopoligono.lonMin</a></li><li><a href="#13">Geopoligono.perimetro_m</a></li><li><a href="#14">Geopoligono.perimetro_km</a></li><li><a href="#15">Geopoligono.perimetroEnvolvente_m</a></li><li><a href="#16">Geopoligono.perimetroEnvolvente_km</a></li><li><a href="#17">Geopoligono.PuntoMedio</a></li><li><a href="#18">Geopoligono</a></li><li><a href="#19">M&eacute;todos:</a></li><li><a href="#20">axis(Geopoligono)</a></li><li><a href="#21">A == B</a></li><li><a href="#22">C == D</a></li><li><a href="#23">B == C</a></li><li><a href="#24">B ~= C</a></li><li><a href="#25">plot(Geopoligono)</a></li><li><a href="#26">Geopoligono2=sort(Geopoligono)</a></li><li><a href="#27">text(Geopoligono,'geohash')</a></li></ul></div><pre class="codeinput">Coronado = insular(RegionID.coronado);
+Geopoligono = Geopolygon(struct(Coronado.Islote));
+</pre><pre class="codeoutput">Coronado: \\OSTRERO\datos\coronado_LCosta.shp
+</pre><h2 id="2">Propiedades:</h2><pre class="codeinput">properties(Geopoligono)
+</pre><pre class="codeoutput">
+Properties for class Geopolygon:
+
+    Geometry
+    Metadata
+    PuntoMedio
+    X
+    Y
+    Zone
+    area_ha
+    area_km2
+    area_m2
+    ejes
+    geohash
+    indEnv
+    latMax
+    latMin
+    lonMax
+    lonMin
+    perimetroEnvolvente_km
+    perimetroEnvolvente_m
+    perimetro_km
+    perimetro_m
+    xMax
+    xMin
+    yMax
+    yMin
+    Latitude
+    Longitude
+
+</pre><h2 id="3">Geopoligono.Zone</h2><pre class="codeinput">disp(Geopoligono.Zone)
+</pre><pre class="codeoutput">    11    11    11    11    11    11    11
+
+</pre><h2 id="4">Geopoligono.area_ha</h2><pre class="codeinput">disp(Geopoligono.area_ha)
+</pre><pre class="codeoutput">   37.3180    2.0201    9.0394  122.3360    0.0481    0.0098    0.2972
+
+</pre><h2 id="5">Geopoligono.area_km2</h2><pre class="codeinput">disp(Geopoligono.area_km2)
+</pre><pre class="codeoutput">    0.3732    0.0202    0.0904    1.2234    0.0005    0.0001    0.0030
+
+</pre><h2 id="6">Geopoligono.area_m2</h2><pre class="codeinput">disp(Geopoligono.area_m2)
+</pre><pre class="codeoutput">   1.0e+06 *
+
+    0.3732    0.0202    0.0904    1.2234    0.0005    0.0001    0.0030
+
+</pre><h2 id="7">Geopoligono.ejes</h2><pre class="codeinput">disp(Geopoligono.ejes)
+</pre><pre class="codeoutput"> -117.3159 -117.2240   32.3762   32.4603
+
+</pre><h2 id="8">Geopoligono.geohash</h2><pre class="codeinput">disp(Geopoligono.geohash)
+</pre><pre class="codeoutput">  Columns 1 through 5
+
+    '9mu8dc'    '9mu87w'    '9mu87tm'    '9mu8k51'    '9mu87y5vj'
+
+  Columns 6 through 7
+
+    '9mu87yh3c'    '9mu87yh0'
+
+</pre><h2 id="9">Geopoligono.latMax</h2><pre class="codeinput">disp(Geopoligono.latMax)
+</pre><pre class="codeoutput">   32.4462
+
+</pre><h2 id="10">Geopoligono.latMin</h2><pre class="codeinput">disp(Geopoligono.latMin)
+</pre><pre class="codeoutput">   32.3902
+
+</pre><h2 id="11">Geopoligono.lonMax</h2><pre class="codeinput">disp(Geopoligono.lonMax)
+</pre><pre class="codeoutput"> -117.2393
+
+</pre><h2 id="12">Geopoligono.lonMin</h2><pre class="codeinput">disp(Geopoligono.lonMin)
+</pre><pre class="codeoutput"> -117.3006
+
+</pre><h2 id="13">Geopoligono.perimetro_m</h2><pre class="codeinput">disp(Geopoligono.perimetro_m)
+</pre><pre class="codeoutput">   1.0e+03 *
+
+    4.7349    1.0769    2.7434    9.7452    0.1563    0.0421    0.2066
+
+</pre><h2 id="14">Geopoligono.perimetro_km</h2><pre class="codeinput">disp(Geopoligono.perimetro_km)
+</pre><pre class="codeoutput">    4.7349    1.0769    2.7434    9.7452    0.1563    0.0421    0.2066
+
+</pre><h2 id="15">Geopoligono.perimetroEnvolvente_m</h2><pre class="codeinput">disp(Geopoligono.perimetroEnvolvente_m)
+</pre><pre class="codeoutput">   1.0e+03 *
+
+    3.2095    0.7393    1.6416    7.2610    0.1050    0.0406    0.2049
+
+</pre><h2 id="16">Geopoligono.perimetroEnvolvente_km</h2><pre class="codeinput">disp(Geopoligono.perimetroEnvolvente_km)
+</pre><pre class="codeoutput">    3.2095    0.7393    1.6416    7.2610    0.1050    0.0406    0.2049
+
+</pre><h2 id="17">Geopoligono.PuntoMedio</h2><pre class="codeinput">disp(Geopoligono.PuntoMedio)
+</pre><pre class="codeoutput"> 7&times;1 islas.Geopoint vector with properties:
+
+ Collection properties:
+     Geometry: 'point'
+     Metadata: [1&times;1 struct]
+            X: [1&times;7 double]
+            Y: [1&times;7 double]
+         Zone: 11
+ Feature properties:
+     Latitude: [32.4396 32.4245 32.4177 32.4049 32.4215 32.4210 32.4207]
+    Longitude: [1&times;7 double]
+
+</pre><h2 id="18">Geopoligono</h2><pre class="codeinput">disp(Geopoligono)
+</pre><pre class="codeoutput"> 7&times;1 Geopolygon vector with properties:
+
+ Collection properties:
+                  Geometry: 'polygon'
+                  Metadata: [1&times;1 struct]
+                PuntoMedio: [7&times;1 islas.Geopoint]
+                         X: [1&times;3386 double]
+                         Y: [1&times;3386 double]
+                      Zone: [11 11 11 11 11 11 11]
+                   area_ha: [37.3180 2.0201 9.0394 122.3360 0.0481 0.0098 0.2972]
+                  area_km2: [0.3732 0.0202 0.0904 1.2234 4.8052e-04 9.7675e-05 0.0030]
+                   area_m2: [1&times;7 double]
+                      ejes: [-117.3159 -117.2240 32.3762 32.4603]
+                   geohash: {1&times;7 cell}
+                    indEnv: {1&times;7 cell}
+                    latMax: 32.4462
+                    latMin: 32.3902
+                    lonMax: -117.2393
+                    lonMin: -117.3006
+    perimetroEnvolvente_km: [3.2095 0.7393 1.6416 7.2610 0.1050 0.0406 0.2049]
+     perimetroEnvolvente_m: [1&times;7 double]
+              perimetro_km: [4.7349 1.0769 2.7434 9.7452 0.1563 0.0421 0.2066]
+               perimetro_m: [1&times;7 double]
+                      xMax: 4.7749e+05
+                      xMin: 4.7174e+05
+                      yMax: 3.5899e+06
+                      yMin: 3.5837e+06
+ Vertex properties:
+  (7 features concatenated with 6 delimiters)
+                  Latitude: [1&times;3386 double]
+                 Longitude: [1&times;3386 double]
+
+</pre><h2 id="19">M&eacute;todos:</h2><pre class="codeinput">methods(Geopoligono)
+</pre><pre class="codeoutput">
+Methods for class Geopolygon:
+
+Geopolygon  disp        isfield     plot        sort        
+append      eq          isprop      properties  struct      
+axis        fieldnames  length      rmfield     text        
+cat         geostruct   mapstruct   rmprop      vertcat     
+convhull    isempty     ne          size        
+
+</pre><h2 id="20">axis(Geopoligono)</h2><pre class="codeinput">axis(Geopoligono)
+CoronadoNorte = insular(RegionID.coronadonorte);
+B = Geopolygon(struct(CoronadoNorte.Islote));
+esB = strcmpi(Geopoligono.geohash,B.geohash);
+A = Geopoligono(esB);
+</pre><pre class="codeoutput">Coronado Norte: \\OSTRERO\datos\MEX_adm0.shp
+</pre><img vspace="5" hspace="5" src="demoGeopolygon_01.png" alt=""> <h2 id="21">A == B</h2><pre class="codeinput">disp(A == B)
+
+C = Geopolygon(struct(Coronado.Margen));
+D = Geopolygon(struct(Coronado.Margen));
+</pre><pre class="codeoutput">   1
+
+</pre><h2 id="22">C == D</h2><pre class="codeinput">disp(C == D)
+</pre><pre class="codeoutput">   1
+
+</pre><h2 id="23">B == C</h2><pre class="codeinput">disp(B == C)
+</pre><pre class="codeoutput">   0
+
+</pre><h2 id="24">B ~= C</h2><pre class="codeinput">disp(B ~= C)
+</pre><pre class="codeoutput">   1
+
+</pre><h2 id="25">plot(Geopoligono)</h2><pre class="codeinput">plot(Geopoligono)
+</pre><img vspace="5" hspace="5" src="demoGeopolygon_02.png" alt=""> <h2 id="26">Geopoligono2=sort(Geopoligono)</h2><pre class="codeinput">Geopoligono2=sort(Geopoligono);
+disp(Geopoligono2)
+</pre><pre class="codeoutput"> 7&times;1 Geopolygon vector with properties:
+
+ Collection properties:
+                  Geometry: 'polygon'
+                  Metadata: [1&times;1 struct]
+                PuntoMedio: [7&times;1 islas.Geopoint]
+                         X: [1&times;3386 double]
+                         Y: [1&times;3386 double]
+                      Zone: [11 11 11 11 11 11 11]
+                   area_ha: [9.0394 2.0201 0.0481 0.2972 0.0098 37.3180 122.3360]
+                  area_km2: [0.0904 0.0202 4.8052e-04 0.0030 9.7675e-05 0.3732 1.2234]
+                   area_m2: [1&times;7 double]
+                      ejes: [-117.3159 -117.2240 32.3762 32.4603]
+                   geohash: {1&times;7 cell}
+                    indEnv: {1&times;7 cell}
+                    latMax: 32.4462
+                    latMin: 32.3902
+                    lonMax: -117.2393
+                    lonMin: -117.3006
+    perimetroEnvolvente_km: [1.6416 0.7393 0.1050 0.2049 0.0406 3.2095 7.2610]
+     perimetroEnvolvente_m: [1&times;7 double]
+              perimetro_km: [2.7434 1.0769 0.1563 0.2066 0.0421 4.7349 9.7452]
+               perimetro_m: [1&times;7 double]
+                      xMax: 4.7749e+05
+                      xMin: 4.7174e+05
+                      yMax: 3.5899e+06
+                      yMin: 3.5837e+06
+ Vertex properties:
+  (7 features concatenated with 6 delimiters)
+                  Latitude: [1&times;3386 double]
+                 Longitude: [1&times;3386 double]
+
+</pre><h2 id="27">text(Geopoligono,'geohash')</h2><pre class="codeinput">text(Geopoligono,<span class="string">'geohash'</span>)
+</pre><img vspace="5" hspace="5" src="demoGeopolygon_03.png" alt=""> <p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2017a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+Coronado = insular(RegionID.coronado);
+Geopoligono = Geopolygon(struct(Coronado.Islote));
+%% Propiedades:
+properties(Geopoligono)
+%% Geopoligono.Zone
+disp(Geopoligono.Zone)
+%% Geopoligono.area_ha
+disp(Geopoligono.area_ha)
+%% Geopoligono.area_km2
+disp(Geopoligono.area_km2)
+%% Geopoligono.area_m2
+disp(Geopoligono.area_m2)
+%% Geopoligono.ejes
+disp(Geopoligono.ejes)
+%% Geopoligono.geohash
+disp(Geopoligono.geohash)
+%% Geopoligono.latMax
+disp(Geopoligono.latMax)
+%% Geopoligono.latMin
+disp(Geopoligono.latMin)
+%% Geopoligono.lonMax
+disp(Geopoligono.lonMax)
+%% Geopoligono.lonMin
+disp(Geopoligono.lonMin)
+%% Geopoligono.perimetro_m
+disp(Geopoligono.perimetro_m)
+%% Geopoligono.perimetro_km
+disp(Geopoligono.perimetro_km)
+%% Geopoligono.perimetroEnvolvente_m
+disp(Geopoligono.perimetroEnvolvente_m)
+%% Geopoligono.perimetroEnvolvente_km
+disp(Geopoligono.perimetroEnvolvente_km)
+%% Geopoligono.PuntoMedio
+disp(Geopoligono.PuntoMedio)
+%% Geopoligono
+disp(Geopoligono)
+
+%% Métodos:
+
+methods(Geopoligono)
+
+%% axis(Geopoligono)
+axis(Geopoligono)
+CoronadoNorte = insular(RegionID.coronadonorte);
+B = Geopolygon(struct(CoronadoNorte.Islote));
+esB = strcmpi(Geopoligono.geohash,B.geohash);
+A = Geopoligono(esB);
+%% A == B
+disp(A == B)
+
+C = Geopolygon(struct(Coronado.Margen));
+D = Geopolygon(struct(Coronado.Margen));
+%% C == D
+disp(C == D)
+%% B == C
+disp(B == C)
+%% B ~= C
+disp(B ~= C)
+%% plot(Geopoligono)
+plot(Geopoligono)
+%% Geopoligono2=sort(Geopoligono)
+Geopoligono2=sort(Geopoligono);
+disp(Geopoligono2)
+%% text(Geopoligono,'geohash')
+text(Geopoligono,'geohash')
+
+
+
+##### SOURCE END #####
+--></body></html>

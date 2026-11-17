@@ -1,0 +1,423 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Demostraci&oacute;n de la clase Insular</title><meta name="generator" content="MATLAB 8.5"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2016-06-14"><meta name="DC.source" content="prueba_insular.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1>Demostraci&oacute;n de la clase Insular</h1><!--introduction--><p>Ejemplos sobre uso de clase <b>insular</b></p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Inicializaci&oacute;n</a></li><li><a href="#2">Todas las islas</a></li><li><a href="#3">Ejemplo de graficado</a></li><li><a href="#6">Graficado de punto medio de un archipi&eacute;lago y punto medio de sus islotes</a></li><li><a href="#9">Aritm&eacute;tica de islas (Teor&iacute;a de conjuntos)</a></li><li><a href="#11">Ejemplo con Islas Marietas</a></li><li><a href="#14">Ejemplo con Islas Coronado</a></li></ul></div><h2>Inicializaci&oacute;n<a name="1"></a></h2><p>Limpia la memoria y actualiza toolbox que contiene clase <b>insular</b></p><pre class="codeinput">updateToolbox(<span class="string">'\\EVARISTO-PC\islas'</span>), refreshPath
+clear, close <span class="string">all</span>, clc
+</pre><pre class="codeoutput">Removiendo el contenido de C:\Users\evaro\Documents\MATLAB\library\islas
+Se actualizaron las l&iacute;neas de costa
+Se actualizaron las demostraciones
+Se actualizaron las funciones principales
+Se actualizaron las clases
+Se actualizaron los datos JSON
+ 
+&Eacute;XITO: Se actualiz&oacute; islas desde \\EVARISTO-PC\islas
+ 
+</pre><h2>Todas las islas<a name="2"></a></h2><pre class="codeinput">figure, hold <span class="string">on</span>
+plotMexico
+todas = listIslands;
+Isla = insular(todas)
+plot(Isla)
+</pre><pre class="codeoutput">
+Isla = 
+
+  Archipi&eacute;lagos:
+ 
+    alacranes                
+    carmen                   
+    cedros                   
+    sanbenito                
+    chinchorro               
+    cozumel                  
+    espiritusanto            
+    guadalupe                
+    carmenloreto             
+    coronadoloreto           
+    danzanteloreto           
+    monserratloreto          
+    santacatalinaloreto      
+    sanjuanicomarias         
+    mariamadremarias         
+    mariamagdalenamarias     
+    mariacleofasmarias       
+    isabel                   
+    marietas                 
+    redonda                  
+    larga                    
+    mujeres                  
+    rasa                     
+    socorrorevillagigedo     
+    sanbenedictorevillagigedo
+    clarionrevillagigedo     
+    tiburon                  
+    sanroque                 
+    asuncion                 
+    natividad                
+    zapatogpe                
+    morroprietogpe           
+    sboeste                  
+    sbmedio                  
+    sbeste                   
+    sanjeronimo              
+    sanmartin                
+    tssur                    
+    tsnorte                  
+    todossantos              
+    coronadosur              
+    coronado                 
+    coronadomedio            
+    coronadonorte            
+ 
+  1x44 insular array with properties:
+
+    id
+    nombre
+    Margen
+    Islote
+    DEM
+    Costa
+    ejes
+    nIslotes
+    PuntoMedio
+    Recuadro
+
+</pre><img vspace="5" hspace="5" src="prueba_insular_01.png" alt=""> <h2>Ejemplo de graficado<a name="3"></a></h2><p>Gargamos Isla Guadalupe</p><pre class="codeinput">Isla = insular(<span class="string">'guadalupe'</span>);
+</pre><p>Graficamos su mapa de elevaci&oacute;n y l&iacute;nea de costa</p><pre class="codeinput">figure, hold <span class="string">on</span>
+pcolor(Isla);
+plot(Isla,<span class="string">'color'</span>,<span class="string">'w'</span>);
+</pre><img vspace="5" hspace="5" src="prueba_insular_02.png" alt=""> <p>Tambien podemos usar la funci&oacute;n de graficado <tt>dem</tt> (Fran&ccedil;ois Beauducel)</p><pre class="codeinput">figure
+dem(Isla);
+</pre><img vspace="5" hspace="5" src="prueba_insular_03.png" alt=""> <h2>Graficado de punto medio de un archipi&eacute;lago y punto medio de sus islotes<a name="6"></a></h2><p>Primero cargamos Arrecife Alacranes y vemos que tiene cuatro islotes</p><pre class="codeinput">Isla = insular(<span class="string">'alacranes'</span>);
+disp([Isla.nombre <span class="string">' contiene '</span> num2str(Isla.nIslotes) <span class="string">' islotes'</span>])
+</pre><pre class="codeoutput">Arrecife Alacranes contiene 4 islotes
+</pre><p>Luego grafiquemos el archipi&eacute;lago y su punto medio</p><pre class="codeinput">figure, hold <span class="string">on</span>
+plot(Isla)
+plot(Isla.PuntoMedio.longitud,Isla.PuntoMedio.latitud,<span class="string">'.'</span>,<span class="string">'markersize'</span>,30);
+</pre><img vspace="5" hspace="5" src="prueba_insular_04.png" alt=""> <p>Por &uacute;ltimo graficamos el punto medio de cada islote</p><pre class="codeinput">PuntoMedio = [Isla.Islote.PuntoMedio];
+lat = [PuntoMedio.latitud];
+lon = [PuntoMedio.longitud];
+plot(lon,lat,<span class="string">'.'</span>,<span class="string">'markersize'</span>,15);
+</pre><img vspace="5" hspace="5" src="prueba_insular_05.png" alt=""> <h2>Aritm&eacute;tica de islas (Teor&iacute;a de conjuntos)<a name="9"></a></h2><p>Un objeto de la clase <tt>insular</tt> representa un archipi&eacute;lago. Utilizando el lenguaje de <i>teor&iacute;a de conjuntos</i> aqu&iacute; definimos un <b>archipi&eacute;lago</b> como un <i>conjunto</i> de islotes, e <b>islote</b> como un <i>elemento</i> de un archipi&eacute;lago. (La palabra <i>isla</i> no est&aacute; definida en el contexto de esta clase.)</p><h2>Ejemplo con Islas Marietas<a name="11"></a></h2><pre class="codeinput">clear
+A = insular(<span class="string">'redonda'</span>);
+B = insular(<span class="string">'larga'</span>);
+C = [A B];
+D = A + B;
+disp(<span class="string">'A ='</span>)
+disp(A)
+disp(<span class="string">' '</span>)
+disp(<span class="string">'B ='</span>)
+disp(B)
+disp(<span class="string">' '</span>)
+disp(<span class="string">'[A B] ='</span>)
+disp(C)
+disp([<span class="string">'[A B] es de tama&ntilde;o '</span> num2str(size(C,1)) <span class="string">'x'</span> num2str(size(C,2))])
+disp([<span class="string">'[A B] tiene ['</span> num2str([C.nIslotes]) <span class="string">'] islotes'</span>])
+disp(<span class="string">' '</span>)
+disp(<span class="string">'A + B ='</span>)
+disp(D)
+disp([<span class="string">'A + B es de tama&ntilde;o '</span> num2str(size(D,1)) <span class="string">'x'</span> num2str(size(D,2))])
+disp([<span class="string">'A + B tiene ['</span> num2str([D.nIslotes]) <span class="string">'] islotes'</span>])
+disp(<span class="string">' '</span>)
+</pre><pre class="codeoutput">A =
+ 
+  insular with properties:
+
+            id: 'redonda'
+        nombre: 'Redonda'
+        Margen: [1x1 struct]
+        Islote: [1x1 islet]
+           DEM: []
+         Costa: [1x1 struct]
+          ejes: [-105.5787 -105.5550 20.6897 20.7118]
+      nIslotes: 1
+    PuntoMedio: [1x1 struct]
+      Recuadro: [1x1 struct]
+
+ 
+B =
+ 
+  insular with properties:
+
+            id: 'larga'
+        nombre: 'Larga'
+        Margen: [1x1 struct]
+        Islote: [1x1 islet]
+           DEM: []
+         Costa: [1x1 struct]
+          ejes: [-105.6008 -105.5696 20.6797 20.7146]
+      nIslotes: 1
+    PuntoMedio: [1x1 struct]
+      Recuadro: [1x1 struct]
+
+ 
+[A B] =
+  Archipi&eacute;lagos:
+ 
+    redonda
+    larga  
+ 
+  1x2 insular array with properties:
+
+    id
+    nombre
+    Margen
+    Islote
+    DEM
+    Costa
+    ejes
+    nIslotes
+    PuntoMedio
+    Recuadro
+
+[A B] es de tama&ntilde;o 1x2
+[A B] tiene [1  1] islotes
+ 
+A + B =
+ 
+  insular with properties:
+
+            id: 'marietas'
+        nombre: 'Marietas'
+        Margen: [1x1 struct]
+        Islote: [1x2 islet]
+           DEM: []
+         Costa: [1x1 struct]
+          ejes: [-105.6146 -105.5390 20.6688 20.7282]
+      nIslotes: 2
+    PuntoMedio: [1x1 struct]
+      Recuadro: [1x1 struct]
+
+A + B es de tama&ntilde;o 1x1
+A + B tiene [2] islotes
+ 
+</pre><pre class="codeinput">figure
+subplot(1,2,1), hold <span class="string">on</span>
+pcolor(C)
+plot(C,<span class="string">'w'</span>)
+title(<span class="string">'[Redonda Larga]'</span>)
+subplot(1,2,2), hold <span class="string">on</span>
+pcolor(D)
+plot(D,<span class="string">'w'</span>)
+title(<span class="string">'Redonda + Larga'</span>)
+</pre><img vspace="5" hspace="5" src="prueba_insular_06.png" alt=""> <h2>Ejemplo con Islas Coronado<a name="14"></a></h2><pre class="codeinput">clear
+A = insular(<span class="string">'coronadonorte'</span>)+insular(<span class="string">'coronadosur'</span>);
+B = insular(<span class="string">'coronado'</span>)-insular(<span class="string">'coronadomedio'</span>);
+disp(<span class="string">'(Coronado Norte + Coronado Sur) == (Islas Coronado - Coronado Medio):'</span>)
+disp(A==B)
+</pre><pre class="codeoutput">(Coronado Norte + Coronado Sur) == (Islas Coronado - Coronado Medio):
+     1
+
+</pre><p>Resulta que (Coronado Norte + Coronado Sur) es igual que (Islas Coronado - Coronado Medio)</p><p>Esperamos que las gr&aacute;ficas sean id&eacute;nticas:</p><pre class="codeinput">figure
+subplot(1,2,1)
+plot(A)
+ejes = A.ejes;
+axis(ejes)
+title(<span class="string">'Coronado Norte + Coronado Sur'</span>)
+subplot(1,2,2)
+plot(B)
+axis(ejes)
+title(<span class="string">'Islas Coronado - Coronado Medio'</span>)
+</pre><img vspace="5" hspace="5" src="prueba_insular_07.png" alt=""> <pre class="codeinput">[fA,vA] = poly2fv(A.Margen.longitud,A.Margen.latitud);
+[fB,vB] = poly2fv(B.Margen.longitud,B.Margen.latitud);
+figure
+subplot(1,2,1), hold <span class="string">on</span>
+patch(<span class="string">'Faces'</span>,fA,<span class="string">'Vertices'</span>,vA,<span class="string">'FaceColor'</span>,[.6 .6 .8],<span class="string">'EdgeColor'</span>, <span class="string">'none'</span>)
+plot(A,<span class="string">'color'</span>,[.4 .4 .6])
+axis(A.ejes)
+title(<span class="string">'Coronado Norte + Coronado Sur'</span>)
+subplot(1,2,2), hold <span class="string">on</span>
+patch(<span class="string">'Faces'</span>,fB,<span class="string">'Vertices'</span>,vB,<span class="string">'FaceColor'</span>,[.6 .6 .8],<span class="string">'EdgeColor'</span>, <span class="string">'none'</span>)
+plot(B,<span class="string">'color'</span>,[.4 .4 .6])
+axis(B.ejes)
+title(<span class="string">'Islas Coronado - Coronado Medio'</span>)
+</pre><img vspace="5" hspace="5" src="prueba_insular_08.png" alt=""> <p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2015a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% Demostración de la clase Insular
+% Ejemplos sobre uso de clase *insular*
+
+%% Inicialización
+% Limpia la memoria y actualiza toolbox que contiene clase *insular*
+updateToolbox('\\EVARISTO-PC\islas'), refreshPath
+clear, close all, clc
+
+%% Todas las islas
+figure, hold on
+plotMexico
+todas = listIslands;
+Isla = insular(todas)
+plot(Isla)
+
+%% Ejemplo de graficado
+% Gargamos Isla Guadalupe
+Isla = insular('guadalupe');
+%%
+% Graficamos su mapa de elevación y línea de costa
+figure, hold on
+pcolor(Isla);
+plot(Isla,'color','w');
+%%
+% Tambien podemos usar la función de graficado |dem| (François Beauducel)
+figure
+dem(Isla);
+
+%% Graficado de punto medio de un archipiélago y punto medio de sus islotes
+% Primero cargamos Arrecife Alacranes y vemos que tiene cuatro islotes
+Isla = insular('alacranes');
+disp([Isla.nombre ' contiene ' num2str(Isla.nIslotes) ' islotes'])
+%%
+% Luego grafiquemos el archipiélago y su punto medio
+figure, hold on
+plot(Isla)
+plot(Isla.PuntoMedio.longitud,Isla.PuntoMedio.latitud,'.','markersize',30);
+%%
+% Por último graficamos el punto medio de cada islote
+PuntoMedio = [Isla.Islote.PuntoMedio];
+lat = [PuntoMedio.latitud];
+lon = [PuntoMedio.longitud];
+plot(lon,lat,'.','markersize',15);
+
+%% Aritmética de islas (Teoría de conjuntos)
+% Un objeto de la clase |insular| representa un archipiélago. Utilizando el
+% lenguaje de _teoría de conjuntos_ aquí definimos un *archipiélago* como un
+% _conjunto_ de islotes, e *islote* como un _elemento_ de un archipiélago. (La
+% palabra _isla_ no está definida en el contexto de esta clase.)
+%%
+%%% Ejemplo con Islas Marietas
+clear
+A = insular('redonda');
+B = insular('larga');
+C = [A B];
+D = A + B;
+disp('A =')
+disp(A)
+disp(' ')
+disp('B =')
+disp(B)
+disp(' ')
+disp('[A B] =')
+disp(C)
+disp(['[A B] es de tamaño ' num2str(size(C,1)) 'x' num2str(size(C,2))])
+disp(['[A B] tiene [' num2str([C.nIslotes]) '] islotes'])
+disp(' ')
+disp('A + B =')
+disp(D)
+disp(['A + B es de tamaño ' num2str(size(D,1)) 'x' num2str(size(D,2))])
+disp(['A + B tiene [' num2str([D.nIslotes]) '] islotes'])
+disp(' ')
+%%
+%
+figure
+subplot(1,2,1), hold on
+pcolor(C)
+plot(C,'w')
+title('[Redonda Larga]')
+subplot(1,2,2), hold on
+pcolor(D)
+plot(D,'w')
+title('Redonda + Larga')
+%%
+%%% Ejemplo con Islas Coronado
+clear
+A = insular('coronadonorte')+insular('coronadosur');
+B = insular('coronado')-insular('coronadomedio');
+disp('(Coronado Norte + Coronado Sur) == (Islas Coronado - Coronado Medio):')
+disp(A==B)
+%%
+% Resulta que (Coronado Norte + Coronado Sur) es igual que (Islas Coronado
+% - Coronado Medio)
+%
+% Esperamos que las gráficas sean idénticas:
+figure
+subplot(1,2,1)
+plot(A)
+ejes = A.ejes;
+axis(ejes)
+title('Coronado Norte + Coronado Sur')
+subplot(1,2,2)
+plot(B)
+axis(ejes)
+title('Islas Coronado - Coronado Medio')
+%%
+%
+[fA,vA] = poly2fv(A.Margen.longitud,A.Margen.latitud);
+[fB,vB] = poly2fv(B.Margen.longitud,B.Margen.latitud);
+figure
+subplot(1,2,1), hold on
+patch('Faces',fA,'Vertices',vA,'FaceColor',[.6 .6 .8],'EdgeColor', 'none')
+plot(A,'color',[.4 .4 .6])
+axis(A.ejes)
+title('Coronado Norte + Coronado Sur')
+subplot(1,2,2), hold on
+patch('Faces',fB,'Vertices',vB,'FaceColor',[.6 .6 .8],'EdgeColor', 'none') 
+plot(B,'color',[.4 .4 .6])
+axis(B.ejes)
+title('Islas Coronado - Coronado Medio')
+
+
+
+##### SOURCE END #####
+--></body></html>

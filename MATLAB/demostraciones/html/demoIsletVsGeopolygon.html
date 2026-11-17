@@ -1,0 +1,209 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Demostraci&oacute;n de clase Islet</title><meta name="generator" content="MATLAB 9.2"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2017-11-28"><meta name="DC.source" content="demoIsletVsGeopolygon.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1>Demostraci&oacute;n de clase <b>Islet</b></h1><!--introduction--><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Diferencia entre <tt>Islet</tt> y <tt>Geopolygon</tt></a></li><li><a href="#2">Diferencia entre las propiedades de <tt>Islet</tt> y <tt>Geopolygon</tt></a></li><li><a href="#5">Propiedad <tt>Envolvente</tt></a></li><li><a href="#6">Propiedad <tt>Recuadro</tt></a></li><li><a href="#7">Propiedad <tt>Tamano</tt></a></li><li><a href="#8">Diferencia entre m&eacute;todos de <tt>Islet</tt> y <tt>Geopolygon</tt></a></li><li><a href="#10">Metodo <tt>ismember</tt></a></li><li><a href="#12">Metodo <tt>union</tt></a></li><li><a href="#13">Metodo <tt>isequal</tt></a></li></ul></div><h2 id="1">Diferencia entre <tt>Islet</tt> y <tt>Geopolygon</tt></h2><p><b>Islet</b> es subclase de <b>Geopolygon</b>. Revisaremos las propiedades y m&eacute;todos en los que difieren.</p><h2 id="2">Diferencia entre las propiedades de <tt>Islet</tt> y <tt>Geopolygon</tt></h2><pre class="codeinput">propiedadesIslote = properties(<span class="string">'Islet'</span>);
+propiedadesGeopoligono = properties(<span class="string">'Geopolygon'</span>);
+disp(propiedadesIslote(~ismember(propiedadesIslote,propiedadesGeopoligono)))
+</pre><pre class="codeoutput">    'Envolvente'
+    'Recuadro'
+    'tamano'
+
+</pre><p>Las propiedades <tt>Envolvente</tt>, <tt>Recuadro</tt> y <tt>tamano</tt> son las que no hereda de <b>Geopolygon</b>. Revisaremos cada una.</p><pre class="codeinput">Coronado = insular(RegionID.coronado);
+Islote = Coronado.Islote;
+disp([<span class="string">'Islote es de clase: '</span> class(Islote)])
+</pre><pre class="codeoutput">Coronado: \\OSTRERO\datos\coronado_LCosta.shp
+Islote es de clase: Islet
+</pre><pre class="codeinput">figure, hold <span class="string">on</span>
+Islote.plot();
+</pre><img vspace="5" hspace="5" src="demoIsletVsGeopolygon_01.png" alt=""> <h2 id="5">Propiedad <tt>Envolvente</tt></h2><pre class="codeinput">Islote.Envolvente.plot();
+disp([<span class="string">'Envolvente es de clase: '</span> class(Islote.Envolvente)])
+</pre><pre class="codeoutput">Envolvente es de clase: Geopolygon
+</pre><img vspace="5" hspace="5" src="demoIsletVsGeopolygon_02.png" alt=""> <h2 id="6">Propiedad <tt>Recuadro</tt></h2><pre class="codeinput">Islote.Recuadro.plot()
+disp([<span class="string">'Recuadro es de clase: '</span> class(Islote.Recuadro)])
+</pre><pre class="codeoutput">Recuadro es de clase: Geopolygon
+</pre><img vspace="5" hspace="5" src="demoIsletVsGeopolygon_03.png" alt=""> <h2 id="7">Propiedad <tt>Tamano</tt></h2><pre class="codeinput">Islote.text(<span class="string">'tamano'</span>)
+</pre><img vspace="5" hspace="5" src="demoIsletVsGeopolygon_04.png" alt=""> <h2 id="8">Diferencia entre m&eacute;todos de <tt>Islet</tt> y <tt>Geopolygon</tt></h2><pre class="codeinput">metodosIslote = methods(<span class="string">'Islet'</span>);
+metodosGeopoligono = methods(<span class="string">'Geopolygon'</span>);
+disp(metodosIslote(~ismember(metodosIslote,metodosGeopoligono)))
+</pre><pre class="codeoutput">    'Islet'
+    'isequal'
+    'ismember'
+    'union'
+
+</pre><p>Los m&eacute;todos <tt>isequal</tt>, <tt>ismember</tt> y <tt>union</tt> son los que no hereda de <b>Geopolygon</b>. Revisaremos cada uno.</p><pre class="codeinput">CoronadoNorte = insular(RegionID.coronadonorte);
+CoronadoNorte.importCoast([toolboxes.getDataPath filesep <span class="string">'coronado_LCosta.shp'</span>], 11);
+IsloteNorte = CoronadoNorte.Islote;
+figure, hold <span class="string">on</span>
+Islote.plot(<span class="string">'LineWidth'</span>,3,<span class="string">'color'</span>,<span class="string">'b'</span>);
+IsloteNorte.plot(<span class="string">'LineWidth'</span>,3,<span class="string">'color'</span>,<span class="string">'k'</span>);
+</pre><pre class="codeoutput">Coronado Norte: \\OSTRERO\datos\MEX_adm0.shp
+</pre><img vspace="5" hspace="5" src="demoIsletVsGeopolygon_05.png" alt=""> <h2 id="10">Metodo <tt>ismember</tt></h2><pre class="codeinput">disp(ismember(IsloteNorte,Islote))
+</pre><pre class="codeoutput">   1
+
+</pre><pre class="codeinput">disp(ismember(Islote,IsloteNorte))
+</pre><pre class="codeoutput">   1
+   0
+   0
+   0
+   0
+   0
+   0
+
+</pre><h2 id="12">Metodo <tt>union</tt></h2><pre class="codeinput">Coronado.importCoast([toolboxes.getDataPath filesep <span class="string">'MEX_adm0.shp'</span>], 11);
+CoronadoNorte.importCoast([toolboxes.getDataPath filesep <span class="string">'MEX_adm0.shp'</span>], 11);
+CoronadoMedio = insular(RegionID.coronadomedio);
+CoronadoSur = insular(RegionID.coronadosur);
+Islote = Coronado.Islote;
+IsloteNorte = CoronadoNorte.Islote;
+IsloteMedio = CoronadoMedio.Islote;
+IsloteSur = CoronadoSur.Islote;
+norteUnionMedio = union(IsloteNorte,IsloteMedio);
+medioUnionSur = union(IsloteMedio,IsloteSur);
+unionIslotes = union(norteUnionMedio,medioUnionSur);
+figure, hold <span class="string">on</span>
+unionIslotes.plot();
+</pre><pre class="codeoutput">Coronado Medio: \\OSTRERO\datos\MEX_adm0.shp
+Coronado Sur: \\OSTRERO\datos\MEX_adm0.shp
+</pre><img vspace="5" hspace="5" src="demoIsletVsGeopolygon_06.png" alt=""> <h2 id="13">Metodo <tt>isequal</tt></h2><pre class="codeinput">disp(isequal(unionIslotes,Islote))
+</pre><pre class="codeoutput">   1
+
+</pre><p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2017a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% Demostración de clase *Islet*
+%
+%% Diferencia entre |Islet| y |Geopolygon|
+% *Islet* es subclase de *Geopolygon*. Revisaremos las propiedades y
+% métodos en los que difieren.
+%% Diferencia entre las propiedades de |Islet| y |Geopolygon|
+%
+propiedadesIslote = properties('Islet');
+propiedadesGeopoligono = properties('Geopolygon');
+disp(propiedadesIslote(~ismember(propiedadesIslote,propiedadesGeopoligono)))
+%% 
+% Las propiedades |Envolvente|, |Recuadro| y |tamano| son las que no hereda
+% de *Geopolygon*. Revisaremos cada una.
+Coronado = insular(RegionID.coronado);
+Islote = Coronado.Islote;
+disp(['Islote es de clase: ' class(Islote)])
+%% 
+%
+figure, hold on
+Islote.plot();
+%% Propiedad |Envolvente|
+%
+Islote.Envolvente.plot();
+disp(['Envolvente es de clase: ' class(Islote.Envolvente)])
+%% Propiedad |Recuadro|
+%
+Islote.Recuadro.plot()
+disp(['Recuadro es de clase: ' class(Islote.Recuadro)])
+%% Propiedad |Tamano|
+%
+Islote.text('tamano')
+%% Diferencia entre métodos de |Islet| y |Geopolygon|
+%
+metodosIslote = methods('Islet');
+metodosGeopoligono = methods('Geopolygon');
+disp(metodosIslote(~ismember(metodosIslote,metodosGeopoligono)))
+%%
+% Los métodos |isequal|, |ismember| y |union| son los que no hereda de
+% *Geopolygon*. Revisaremos cada uno.
+CoronadoNorte = insular(RegionID.coronadonorte);
+CoronadoNorte.importCoast([toolboxes.getDataPath filesep 'coronado_LCosta.shp'], 11);
+IsloteNorte = CoronadoNorte.Islote;
+figure, hold on
+Islote.plot('LineWidth',3,'color','b');
+IsloteNorte.plot('LineWidth',3,'color','k');
+%% Metodo |ismember|
+%
+disp(ismember(IsloteNorte,Islote))
+%%
+%
+disp(ismember(Islote,IsloteNorte))
+%% Metodo |union|
+%
+Coronado.importCoast([toolboxes.getDataPath filesep 'MEX_adm0.shp'], 11);
+CoronadoNorte.importCoast([toolboxes.getDataPath filesep 'MEX_adm0.shp'], 11);
+CoronadoMedio = insular(RegionID.coronadomedio);
+CoronadoSur = insular(RegionID.coronadosur);
+Islote = Coronado.Islote;
+IsloteNorte = CoronadoNorte.Islote;
+IsloteMedio = CoronadoMedio.Islote;
+IsloteSur = CoronadoSur.Islote;
+norteUnionMedio = union(IsloteNorte,IsloteMedio);
+medioUnionSur = union(IsloteMedio,IsloteSur);
+unionIslotes = union(norteUnionMedio,medioUnionSur);
+figure, hold on
+unionIslotes.plot();
+%% Metodo |isequal|
+%
+disp(isequal(unionIslotes,Islote))
+
+
+##### SOURCE END #####
+--></body></html>

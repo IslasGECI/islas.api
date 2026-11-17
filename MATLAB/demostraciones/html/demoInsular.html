@@ -1,0 +1,465 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Demostraci&oacute;n de la clase Insular</title><meta name="generator" content="MATLAB 9.2"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2017-11-06"><meta name="DC.source" content="demoInsular.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1>Demostraci&oacute;n de la clase Insular</h1><!--introduction--><p>Ejemplos sobre uso de clase <b>insular</b></p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Inicializaci&oacute;n</a></li><li><a href="#2"><b>ARCHIPI&Eacute;LAGOS ESCALARES</b></a></li><li><a href="#3">Ejemplo con Isla Guadalupe</a></li><li><a href="#7"><b>PROPIEDAD <tt>ISLOTE</tt></b></a></li><li><a href="#8"><b>Graficado de punto medio de un archipi&eacute;lago y punto medio de sus islotes</b></a></li><li><a href="#9">Ejemplo con Islas Coronado</a></li><li><a href="#12">Ejemplo con Islas Todos Santos</a></li><li><a href="#15"><b>Tama&ntilde;o de los elementos</b></a></li><li><a href="#16">Ejemplo con Islas Coronado</a></li><li><a href="#17">Ejemplo con Islas Todos Santos</a></li><li><a href="#18">Ejemplo con Isla Guadalupe</a></li><li><a href="#19"><b>ARCHIPIELAGOS VECTORIALES</b></a></li><li><a href="#20">Ejemplo con todas las islas</a></li><li><a href="#22">Ejemplo con Islas del Pac&iacute;fico</a></li><li><a href="#25">Ejemplo con Aves Marinas End&eacute;micas</a></li></ul></div><h2 id="1">Inicializaci&oacute;n</h2><p>Limpia la memoria y actualiza toolbox que contiene clase <b>insular</b></p><pre class="codeinput">clear, close <span class="string">all</span>, clc
+</pre><h2 id="2"><b>ARCHIPI&Eacute;LAGOS ESCALARES</b></h2><h2 id="3">Ejemplo con Isla Guadalupe</h2><pre class="codeinput">Isla = insular(<span class="string">'guadalupe'</span>);
+</pre><pre class="codeoutput">Guadalupe: guadalupe_LCosta.shp
+</pre><p>Graficamos su mapa de elevaci&oacute;n y l&iacute;nea de costa</p><pre class="codeinput">figure, hold <span class="string">on</span>
+pcolor(Isla);
+plot(Isla,<span class="string">'color'</span>,<span class="string">'w'</span>);
+text(Isla,<span class="string">'nombre'</span>);
+axis(Isla)
+</pre><pre class="codeoutput">Download http://rmd.neoknet.com/srtm1/N28W119.hgt.zip ... done.
+Download http://rmd.neoknet.com/srtm1/N29W119.hgt.zip ... done.
+</pre><img vspace="5" hspace="5" src="demoInsular_01.png" alt=""> <p>Usamos los m&eacute;todos <tt>geoshow</tt> y <tt>mapshow</tt></p><pre class="codeinput">figure
+geoshow(Isla);
+figure
+mapshow(Isla);
+</pre><img vspace="5" hspace="5" src="demoInsular_02.png" alt=""> <img vspace="5" hspace="5" src="demoInsular_03.png" alt=""> <p>Tambien podemos usar la funci&oacute;n de graficado <tt>dem</tt> (Fran&ccedil;ois Beauducel)</p><pre class="codeinput">figure
+dem(Isla);
+</pre><img vspace="5" hspace="5" src="demoInsular_04.png" alt=""> <h2 id="7"><b>PROPIEDAD <tt>ISLOTE</tt></b></h2><h2 id="8"><b>Graficado de punto medio de un archipi&eacute;lago y punto medio de sus islotes</b></h2><h2 id="9">Ejemplo con Islas Coronado</h2><pre class="codeinput">Isla = insular(<span class="string">'coronado'</span>);
+</pre><pre class="codeoutput">Coronado: coronado_LCosta.shp
+</pre><p>Primero graficamos el archipi&eacute;lago y su punto medio</p><pre class="codeinput">figure, hold <span class="string">on</span>
+plot(Isla);
+title(Isla.nombre)
+axis(Isla)
+plot(Isla.PuntoMedio,<span class="string">'*'</span>,<span class="string">'markersize'</span>,10);
+</pre><img vspace="5" hspace="5" src="demoInsular_05.png" alt=""> <p>y luego graficamos el punto medio de cada islote</p><pre class="codeinput">plot(Isla.Islote.PuntoMedio,<span class="string">'.'</span>,<span class="string">'markersize'</span>,15);
+</pre><img vspace="5" hspace="5" src="demoInsular_06.png" alt=""> <h2 id="12">Ejemplo con Islas Todos Santos</h2><pre class="codeinput">Isla = insular(<span class="string">'todossantos'</span>);
+</pre><pre class="codeoutput">Todos Santos: todos_santos_LCosta_2014.shp
+</pre><p>Primero graficamos el archipi&eacute;lago y su punto medio</p><pre class="codeinput">figure, hold <span class="string">on</span>
+plot(Isla);
+title(Isla.nombre)
+axis(Isla)
+plot(Isla.PuntoMedio,<span class="string">'*'</span>,<span class="string">'markersize'</span>,10);
+</pre><img vspace="5" hspace="5" src="demoInsular_07.png" alt=""> <p>y luego graficamos el punto medio de cada islote</p><pre class="codeinput">plot(Isla.Islote.PuntoMedio,<span class="string">'.'</span>,<span class="string">'markersize'</span>,15);
+</pre><img vspace="5" hspace="5" src="demoInsular_08.png" alt=""> <h2 id="15"><b>Tama&ntilde;o de los elementos</b></h2><h2 id="16">Ejemplo con Islas Coronado</h2><pre class="codeinput">Isla = insular(<span class="string">'coronado'</span>);
+figure, hold <span class="string">on</span>
+plot(Isla);
+text(Isla.Islote,<span class="string">'tamano'</span>)
+axis(Isla)
+</pre><pre class="codeoutput">Coronado: coronado_LCosta.shp
+</pre><img vspace="5" hspace="5" src="demoInsular_09.png" alt=""> <h2 id="17">Ejemplo con Islas Todos Santos</h2><pre class="codeinput">Isla = insular(<span class="string">'todossantos'</span>);
+figure, hold <span class="string">on</span>
+plot(Isla);
+text(Isla.Islote,<span class="string">'tamano'</span>)
+axis(Isla)
+</pre><pre class="codeoutput">Todos Santos: todos_santos_LCosta_2014.shp
+</pre><img vspace="5" hspace="5" src="demoInsular_10.png" alt=""> <h2 id="18">Ejemplo con Isla Guadalupe</h2><pre class="codeinput">Isla = insular(<span class="string">'guadalupe'</span>);
+figure, hold <span class="string">on</span>
+plot(Isla);
+text(Isla.Islote,<span class="string">'tamano'</span>)
+axis(Isla)
+</pre><pre class="codeoutput">Guadalupe: guadalupe_LCosta.shp
+</pre><img vspace="5" hspace="5" src="demoInsular_11.png" alt=""> <h2 id="19"><b>ARCHIPIELAGOS VECTORIALES</b></h2><h2 id="20">Ejemplo con todas las islas</h2><p>Guardamos en la variable <tt>todas</tt> la lista de los IDs de las islas y luego cargamos todas las islas en la variable <tt>Isla</tt></p><pre class="codeinput">todas = listIslands;
+Isla = insular(todas)
+</pre><pre class="codeoutput">Clari&oacute;n: MEX_adm1.shp
+Socorro: MEX_adm1.shp
+Revillagigedo: MEX_adm1.shp
+San Benedicto: MEX_adm1.shp
+Larga: MEX_adm1.shp
+Marietas: MEX_adm1.shp
+Redonda: MEX_adm1.shp
+Mar&iacute;a Cleofas: MEX_adm1.shp
+Mar&iacute;a Madre: MEX_adm1.shp
+San Juanico: MEX_adm1.shp
+Mar&iacute;a Magdalena: MEX_adm1.shp
+Mar&iacute;as: MEX_adm1.shp
+Isabel: MEX_adm1.shp
+Del Carmen: MEX_adm1.shp
+Alijos: alijos_LCosta.shp
+San Roque: san_roque_LCosta.shp
+Asunci&oacute;n: asuncion_LCosta.shp
+Natividad: natividad_LCosta.shp
+Zapato: guadalupe_LCosta.shp
+Morro Prieto: guadalupe_LCosta.shp
+Guadalupe: guadalupe_LCosta.shp
+San Benito Oeste: san_benito_LCosta.shp
+San Benito: san_benito_LCosta.shp
+San Benito Medio: san_benito_LCosta.shp
+San Benito Este: san_benito_LCosta.shp
+San Jer&oacute;nimo: san_jeronimo_LCosta.shp
+San Mart&iacute;n: MEX_adm1.shp
+Cedros: MEX_adm1.shp
+Adelaida: MEX_adm1.shp
+Rasa: MEX_adm1.shp
+&Aacute;ngel de la Guarda: MEX_adm1.shp
+Partida: partida_LCosta_UTM-12.shp
+Todos Santos Sur: todos_santos_LCosta_2014.shp
+Todos Santos Norte: todos_santos_LCosta_2014.shp
+Todos Santos: todos_santos_LCosta_2014.shp
+Coronado Medio: coronado_LCosta.shp
+Coronado: coronado_LCosta.shp
+Coronado Norte: coronado_LCosta.shp
+Coronado Sur: coronado_LCosta.shp
+Creciente: MEX_adm1.shp
+P&aacute;jaros: MEX_adm1.shp
+Magdalena: MEX_adm1.shp
+Pauquino: MEX_adm1.shp
+San Gil: MEX_adm1.shp
+Complejo Insular Esp&iacute;ritu Santo: MEX_adm1.shp
+Mar&iacute;a: MEX_adm1.shp
+Santo Domingo: MEX_adm1.shp
+Danzante: MEX_adm1.shp
+Carmen: MEX_adm1.shp
+Coronado: MEX_adm1.shp
+Santa Catalina: MEX_adm1.shp
+Loreto: MEX_adm1.shp
+Monserrat: MEX_adm1.shp
+Farall&oacute;n de San Ignacio: farallon_de_san_ignacio_LCosta_UTM-12.shp
+San Pedro Martir: san_pedro_martir_LCosta_UTM-12.shp
+Tibur&oacute;n: MEX_adm1.shp
+Banco Chinchorro: MEX_adm1.shp
+Arrecife Alacranes: MEX_adm1.shp
+Cozumel: MEX_adm1.shp
+Mujeres: MEX_adm1.shp
+
+Isla = 
+
+  Archipi&eacute;lagos:
+ 
+    clarionrevillagigedo     
+    socorrorevillagigedo     
+    revillagigedo            
+    sanbenedictorevillagigedo
+    larga                    
+    marietas                 
+    redonda                  
+    mariacleofasmarias       
+    mariamadremarias         
+    sanjuanicomarias         
+    mariamagdalenamarias     
+    marias                   
+    isabel                   
+    carmen                   
+    alijos                   
+    sanroque                 
+    asuncion                 
+    natividad                
+    zapatogpe                
+    morroprietogpe           
+    guadalupe                
+    sboeste                  
+    sanbenito                
+    sbmedio                  
+    sbeste                   
+    sanjeronimo              
+    sanmartin                
+    cedros                   
+    adelaida                 
+    rasa                     
+    angeldelaguarda          
+    partida                  
+    tssur                    
+    tsnorte                  
+    todossantos              
+    coronadomedio            
+    coronado                 
+    coronadonorte            
+    coronadosur              
+    crecientemagdalena       
+    pajarosmagdalena         
+    magdalenamagdalena       
+    pauquinomagdalena        
+    sangilmagdalena          
+    espiritusanto            
+    mariamagdalena           
+    santodomingomagdalena    
+    danzanteloreto           
+    carmenloreto             
+    coronadoloreto           
+    santacatalinaloreto      
+    loreto                   
+    monserratloreto          
+    farallondesanignacio     
+    sanpedromartir           
+    tiburon                  
+    chinchorro               
+    alacranes                
+    cozumel                  
+    mujeres                  
+ 
+  1&times;60 insular array with properties:
+
+    id
+    nombre
+    abrev
+    Margen
+    DEM
+    Islote
+    proyeccion
+    unidades
+    area
+    ejes
+    Envolvente
+    geohash
+    latMax
+    latMin
+    lonMax
+    lonMin
+    nIslotes
+    perimetro
+    PuntoMedio
+    Recuadro
+    xMax
+    xMin
+    yMax
+    yMin
+
+</pre><p>Graficamos la l&iacute;nea de costa de M&eacute;xico con la funci&oacute;n <tt>plotMexicoSinIslas</tt> y graficamos las islas con la fucni&oacute;n <tt>plot</tt> (la cual ha sido sobrecargada para objetos clase <i>insular</i>)</p><pre class="codeinput">figure, hold <span class="string">on</span>
+plotMexicoSinIslas
+plot(Isla);
+text(Isla,<span class="string">'nombre'</span>);
+axis(Isla)
+</pre><img vspace="5" hspace="5" src="demoInsular_12.png" alt=""> <h2 id="22">Ejemplo con Islas del Pac&iacute;fico</h2><pre class="codeinput">ml = {<span class="string">'coronado'</span>,<span class="string">'todossantos'</span>,<span class="string">'sanmartin'</span>,<span class="string">'sanjeronimo'</span>,<span class="string">'natividad'</span>,<span class="string">'sanroque'</span>,<span class="string">'asuncion'</span>};
+ML = insular(ml);
+</pre><pre class="codeoutput">San Roque: san_roque_LCosta.shp
+Asunci&oacute;n: asuncion_LCosta.shp
+Natividad: natividad_LCosta.shp
+San Jer&oacute;nimo: san_jeronimo_LCosta.shp
+San Mart&iacute;n: MEX_adm1.shp
+Todos Santos: todos_santos_LCosta_2014.shp
+Coronado: coronado_LCosta.shp
+</pre><pre class="codeinput">figure, hold <span class="string">on</span>
+plotMexicoSinIslas
+pcolor(ML);
+plot(ML,<span class="string">'color'</span>,<span class="string">'w'</span>);
+text(ML,<span class="string">'nombre'</span>);
+axis(ML)
+</pre><pre class="codeoutput">Download http://rmd.neoknet.com/srtm1/N27W115.hgt.zip ... done.
+Download http://rmd.neoknet.com/srtm1/N27W116.hgt.zip ... done.
+Download http://rmd.neoknet.com/srtm1/N29W116.hgt.zip ... done.
+Download http://rmd.neoknet.com/srtm1/N30W117.hgt.zip ... done.
+Download http://rmd.neoknet.com/srtm1/N31W117.hgt.zip ... done.
+Download http://rmd.neoknet.com/srtm1/N32W118.hgt.zip ... done.
+</pre><img vspace="5" hspace="5" src="demoInsular_13.png" alt=""> <p>Hacemos un acercamiento a Islas Todos Santos</p><pre class="codeinput">esTS = strcmpi(<span class="string">'todossantos'</span>,{ML.id});
+axis(ML(esTS))
+</pre><img vspace="5" hspace="5" src="demoInsular_14.png" alt=""> <h2 id="25">Ejemplo con Aves Marinas End&eacute;micas</h2><pre class="codeinput">alianza = {<span class="string">'guadalupe'</span>,<span class="string">'sanbenito'</span>,<span class="string">'natividad'</span>,<span class="string">'partida'</span>,<span class="string">'sanpedromartir'</span>,<span class="string">'farallondesanignacio'</span>,<span class="string">'revillagigedo'</span>};
+A = insular(alianza);
+</pre><pre class="codeoutput">Revillagigedo: MEX_adm1.shp
+Natividad: natividad_LCosta.shp
+Guadalupe: guadalupe_LCosta.shp
+San Benito: san_benito_LCosta.shp
+Partida: partida_LCosta_UTM-12.shp
+Farall&oacute;n de San Ignacio: farallon_de_san_ignacio_LCosta_UTM-12.shp
+San Pedro Martir: san_pedro_martir_LCosta_UTM-12.shp
+</pre><pre class="codeinput">figure, hold <span class="string">on</span>
+plotMexicoSinIslas
+pcolor(A);
+plot(A,<span class="string">'color'</span>,<span class="string">'w'</span>);
+text(A,<span class="string">'nombre'</span>);
+axis(A)
+</pre><pre class="codeoutput">Download http://rmd.neoknet.com/srtm1/N18W116.hgt.zip ...  ** tile not found. Considering offshore.
+Download http://rmd.neoknet.com/srtm1/N19W116.hgt.zip ...  ** tile not found. Considering offshore.
+Download http://rmd.neoknet.com/srtm1/N18W115.hgt.zip ... done.
+Download http://rmd.neoknet.com/srtm1/N19W115.hgt.zip ...  ** tile not found. Considering offshore.
+Download http://rmd.neoknet.com/srtm1/N18W114.hgt.zip ...  ** tile not found. Considering offshore.
+Download http://rmd.neoknet.com/srtm1/N19W114.hgt.zip ...  ** tile not found. Considering offshore.
+Download http://rmd.neoknet.com/srtm1/N18W113.hgt.zip ...  ** tile not found. Considering offshore.
+Download http://rmd.neoknet.com/srtm1/N19W113.hgt.zip ...  ** tile not found. Considering offshore.
+Download http://rmd.neoknet.com/srtm1/N18W112.hgt.zip ... done.
+Download http://rmd.neoknet.com/srtm1/N19W112.hgt.zip ...  ** tile not found. Considering offshore.
+Download http://rmd.neoknet.com/srtm1/N18W111.hgt.zip ... done.
+Download http://rmd.neoknet.com/srtm1/N19W111.hgt.zip ... done.
+Download http://rmd.neoknet.com/srtm1/N18W110.hgt.zip ...  ** tile not found. Considering offshore.
+Download http://rmd.neoknet.com/srtm1/N19W110.hgt.zip ...  ** tile not found. Considering offshore.
+Download http://rmd.neoknet.com/srtm1/N28W116.hgt.zip ... done.
+Download http://rmd.neoknet.com/srtm1/N28W114.hgt.zip ... done.
+Download http://rmd.neoknet.com/srtm1/N25W110.hgt.zip ... done.
+Download http://rmd.neoknet.com/srtm1/N28W113.hgt.zip ... done.
+</pre><img vspace="5" hspace="5" src="demoInsular_15.png" alt=""> <p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2017a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% Demostración de la clase Insular
+% Ejemplos sobre uso de clase *insular*
+%
+%% Inicialización
+% Limpia la memoria y actualiza toolbox que contiene clase *insular*
+clear, close all, clc
+%% *ARCHIPIÉLAGOS ESCALARES*
+%
+%% Ejemplo con Isla Guadalupe
+Isla = insular('guadalupe');
+%%
+% Graficamos su mapa de elevación y línea de costa
+figure, hold on
+pcolor(Isla);
+plot(Isla,'color','w');
+text(Isla,'nombre');
+axis(Isla)
+%%
+% Usamos los métodos |geoshow| y |mapshow|
+figure
+geoshow(Isla);
+figure
+mapshow(Isla);
+%%
+% Tambien podemos usar la función de graficado |dem| (François Beauducel)
+figure
+dem(Isla);
+
+%% *PROPIEDAD |ISLOTE|*
+%
+%% *Graficado de punto medio de un archipiélago y punto medio de sus islotes*
+%
+%% Ejemplo con Islas Coronado
+Isla = insular('coronado');
+%%
+% Primero graficamos el archipiélago y su punto medio
+figure, hold on
+plot(Isla);
+title(Isla.nombre)
+axis(Isla)
+plot(Isla.PuntoMedio,'*','markersize',10);
+
+%%
+% y luego graficamos el punto medio de cada islote
+
+plot(Isla.Islote.PuntoMedio,'.','markersize',15);
+
+%% Ejemplo con Islas Todos Santos
+Isla = insular('todossantos');
+%%
+% Primero graficamos el archipiélago y su punto medio
+figure, hold on
+plot(Isla);
+title(Isla.nombre)
+axis(Isla)
+plot(Isla.PuntoMedio,'*','markersize',10);
+
+%%
+% y luego graficamos el punto medio de cada islote
+plot(Isla.Islote.PuntoMedio,'.','markersize',15);
+
+%% *Tamaño de los elementos*
+%
+%% Ejemplo con Islas Coronado
+Isla = insular('coronado');
+figure, hold on
+plot(Isla);
+text(Isla.Islote,'tamano')
+axis(Isla)
+%% Ejemplo con Islas Todos Santos
+Isla = insular('todossantos');
+figure, hold on
+plot(Isla);
+text(Isla.Islote,'tamano')
+axis(Isla)
+%% Ejemplo con Isla Guadalupe
+Isla = insular('guadalupe');
+figure, hold on
+plot(Isla);
+text(Isla.Islote,'tamano')
+axis(Isla)
+
+%% *ARCHIPIELAGOS VECTORIALES*
+%
+%% Ejemplo con todas las islas
+% Guardamos en la variable |todas| la lista de los IDs de las islas y luego
+% cargamos todas las islas en la variable |Isla|
+todas = listIslands;
+Isla = insular(todas)
+%%
+% Graficamos la línea de costa de México con la función |plotMexicoSinIslas|
+% y graficamos las islas con la fucnión |plot| (la cual ha sido
+% sobrecargada para objetos clase _insular_)
+figure, hold on
+plotMexicoSinIslas
+plot(Isla);
+text(Isla,'nombre');
+axis(Isla)
+
+%% Ejemplo con Islas del Pacífico
+ml = {'coronado','todossantos','sanmartin','sanjeronimo','natividad','sanroque','asuncion'};
+ML = insular(ml);
+%%
+%
+figure, hold on
+plotMexicoSinIslas
+pcolor(ML);
+plot(ML,'color','w');
+text(ML,'nombre');
+axis(ML)
+%%
+% Hacemos un acercamiento a Islas Todos Santos
+esTS = strcmpi('todossantos',{ML.id});
+axis(ML(esTS))
+
+%% Ejemplo con Aves Marinas Endémicas
+alianza = {'guadalupe','sanbenito','natividad','partida','sanpedromartir','farallondesanignacio','revillagigedo'};
+A = insular(alianza);
+%%
+%
+figure, hold on
+plotMexicoSinIslas
+pcolor(A);
+plot(A,'color','w');
+text(A,'nombre');
+axis(A)
+
+##### SOURCE END #####
+--></body></html>
